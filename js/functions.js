@@ -84,21 +84,21 @@ function showError(errorMsg1, errorMsg2) {
   alert(errorMsg2);
 }
 
-// アルバムタップ時
-function clickAlbum(image) {
+// 世代タップ時
+function clickGeneration(image) {
   // 暗め表示の切り替え
   image.classList.toggle('darkened');
   // 選択中リストの編集
-  if (image.name === 'album') {
-    selectedAlbums = image.classList.contains('darkened')
-      ? selectedAlbums.filter((item) => item !== image.id)
-      : selectedAlbums.concat(image.id);
+  if (image.name === 'generation') {
+    selectedGenerations = image.classList.contains('darkened')
+      ? selectedGenerations.filter((item) => item !== image.id)
+      : selectedGenerations.concat(image.id);
   }
 
   // ローカルストレージに保存
-  setLocalArray('selectedAlbums', selectedAlbums);
+  setLocalArray('selectedGenerations', selectedGenerations);
 
-  // アルバム、ミニアルバムリストより出題する曲リスト取得
+  // 世代リストより出題する曲リスト取得
   selectedSongIndex = getSelectedSongIndex();
   $('#songCount').text(selectedSongIndex.length + ' Songs');
 }
@@ -113,7 +113,7 @@ function getMatchingIndices(arr1, arr2) {
 // 出題する曲リスト
 function getSelectedSongIndex() {
   return Array.from(
-    new Set([...getMatchingIndices(songAlbums, selectedAlbums)])
+    new Set([...getMatchingIndices(songGenerations, selectedGenerations)])
   );
 }
 

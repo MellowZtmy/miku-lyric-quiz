@@ -20,10 +20,10 @@ var csvData = [];
 var acaneWords = [];
 // カラーセット
 var colorSets = [];
-// アルバム名リスト
-var songAlbums = [];
-var selectedAlbums = [];
-var albums = [];
+// 世代名リスト
+var songGenerations = [];
+var selectedGenerations = [];
+var generations = [];
 // 選択曲インデックス
 var selectedSongIndex = [];
 // クイズ
@@ -44,8 +44,8 @@ $(document).ready(async function () {
 
     // 2. 歌詞情報読み込み
     csvData = await fetchCsvData(appsettings.lyricsFileName);
-    songAlbums = csvData[appsettings.albumLine];
-    albums = [...new Set(songAlbums)].filter((item) => item !== '-');
+    songGenerations = csvData[appsettings.generationLine];
+    generations = [...new Set(songGenerations)].filter((item) => item !== '-');
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
@@ -140,11 +140,11 @@ function showResult() {
 function createQuizzes() {
   // ゲームモード取得
   const currentGameMode = $('input[name="quizMode"]:checked').val();
-  // 選択アルバムの曲名取得
+  // 選択世代の曲名取得
   const songs = csvData[appsettings.songNameLine].filter((_, index) =>
     selectedSongIndex.includes(index)
   );
-  // 選択アルバムの歌詞取得
+  // 選択世代の歌詞取得
   const lyrics = [];
   csvData.slice(appsettings.lyricsStartLine).forEach((lyric) => {
     lyrics.push(lyric.filter((_, index) => selectedSongIndex.includes(index)));
@@ -324,9 +324,9 @@ function createDisplay(mode) {
 
       // タグ作成
       if (mode === display.TOP) {
-        // 選択中アルバム設定
-        selectedAlbums = getLocalArray('selectedAlbums');
-        // アルバム、ミニアルバムリストより出題する曲リスト取得
+        // 選択中世代設定
+        selectedGenerations = getLocalArray('selectedGenerations');
+        // 世代リストより出題する曲リスト取得
         selectedSongIndex = getSelectedSongIndex();
 
         // ハイスコア表示
@@ -367,22 +367,22 @@ function createDisplay(mode) {
           getLocal('gameMode') ?? gameMode.LYRIC_TO_SONG.VALUE
         );
 
-        // アルバム
-        tag += ' <h2 class="h2-display">Albums</h2>';
-        albums.forEach(function (album, index) {
+        // 世代
+        tag += ' <h2 class="h2-display">Generations</h2>';
+        generations.forEach(function (generation, index) {
           tag +=
             ' <img src="' +
-            appsettings.albumImagePath +
+            appsettings.generationImagePath +
             +(index + 1) +
             '_' +
-            album +
+            generation +
             '.jpg" id="' +
-            album +
-            '" name="album" alt="' +
-            album +
-            '" class="album' +
-            (selectedAlbums.includes(album) ? '' : ' darkened') +
-            '" onclick="clickAlbum(this)">';
+            generation +
+            '" name="generation" alt="' +
+            generation +
+            '" class="generation' +
+            (selectedGenerations.includes(generation) ? '' : ' darkened') +
+            '" onclick="clickGeneration(this)">';
         });
 
         tag +=
@@ -519,24 +519,24 @@ function createDisplay(mode) {
             '</div>';
           tag += index === quizzes.length - 1 ? '' : '<br>';
         });
-        // アルバム表示
+        // 世代表示
         tag +=
-          selectedAlbums.length > 0
-            ? ' <h2 class="h2-display">Albums</h2>'
+          selectedGenerations.length > 0
+            ? ' <h2 class="h2-display">Generations</h2>'
             : '';
-        albums.forEach(function (album, index) {
-          if (selectedAlbums.includes(album)) {
+        generations.forEach(function (generation, index) {
+          if (selectedGenerations.includes(generation)) {
             tag +=
               ' <img src="' +
-              appsettings.albumImagePath +
+              appsettings.generationImagePath +
               +(index + 1) +
               '_' +
-              album +
+              generation +
               '.jpg" id="' +
-              album +
-              '" name="album" alt="' +
-              album +
-              '" class="album">';
+              generation +
+              '" name="generation" alt="' +
+              generation +
+              '" class="generation">';
           }
         });
 
