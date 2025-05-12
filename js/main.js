@@ -453,7 +453,7 @@ function createDisplay(mode) {
           ? '   <button id="next" onclick="loadQuiz(false)" class="btn btn--main btn--radius btn--cubic visibility-hidden">NEXT→</button>'
           : '   <button id="result" onclick="showResult()" class="btn btn--main btn--radius btn--cubic visibility-hidden">RESULT</button>';
         // MV表示
-        tag += '    <!--MV Youtube--> ';
+        tag += '    <!--MV ニコニコ--> ';
         tag += '    <div class="margin-top-20" id="mv" hidden> ';
         tag +=
           '      <div style="position: relative; width: 100%; padding-bottom: 56.25%"> ';
@@ -468,7 +468,7 @@ function createDisplay(mode) {
         tag += '        > ';
         tag += '          <iframe ';
         tag +=
-          '            src="https://www.youtube.com/embed/' +
+          '            src="https://embed.nicovideo.jp/watch/' +
           quiz.mvId +
           '?loop=1&playlist=' +
           quiz.mvId +
