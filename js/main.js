@@ -20,10 +20,10 @@ var csvData = [];
 var acaneWords = [];
 // カラーセット
 var colorSets = [];
-// 世代名リスト
-var songGenerations = [];
-var selectedGenerations = [];
-var generations = [];
+// ボーカロイド名リスト
+var songVocaloids = [];
+var selectedVocaloids = [];
+var vocaloids = [];
 // 選択曲インデックス
 var selectedSongIndex = [];
 // クイズ
@@ -44,8 +44,8 @@ $(document).ready(async function () {
 
     // 2. 歌詞情報読み込み
     csvData = await fetchCsvData(appsettings.lyricsFileName);
-    songGenerations = csvData[appsettings.generationLine];
-    generations = [...new Set(songGenerations)].filter((item) => item !== '-');
+    songVocaloids = csvData[appsettings.vocaloidLine];
+    vocaloids = [...new Set(songVocaloids)].filter((item) => item !== '-');
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
@@ -140,11 +140,11 @@ function showResult() {
 function createQuizzes() {
   // ゲームモード取得
   const currentGameMode = $('input[name="quizMode"]:checked').val();
-  // 選択世代の曲名取得
+  // 選択ボーカロイドの曲名取得
   const songs = csvData[appsettings.songNameLine].filter((_, index) =>
     selectedSongIndex.includes(index)
   );
-  // 選択世代の歌詞取得
+  // 選択ボーカロイドの歌詞取得
   const lyrics = [];
   csvData.slice(appsettings.lyricsStartLine).forEach((lyric) => {
     lyrics.push(lyric.filter((_, index) => selectedSongIndex.includes(index)));
@@ -324,9 +324,9 @@ function createDisplay(mode) {
 
       // タグ作成
       if (mode === display.TOP) {
-        // 選択中世代設定
-        selectedGenerations = getLocalArray('selectedGenerations');
-        // 世代リストより出題する曲リスト取得
+        // 選択中ボーカロイド設定
+        selectedVocaloids = getLocalArray('selectedVocaloids');
+        // ボーカロイドリストより出題する曲リスト取得
         selectedSongIndex = getSelectedSongIndex();
 
         // ハイスコア表示
@@ -367,22 +367,22 @@ function createDisplay(mode) {
           getLocal('gameMode') ?? gameMode.LYRIC_TO_SONG.VALUE
         );
 
-        // 世代
-        tag += ' <h2 class="h2-display">Generations</h2>';
-        generations.forEach(function (generation, index) {
+        // ボーカロイド
+        tag += ' <h2 class="h2-display">Vocaloids</h2>';
+        vocaloids.forEach(function (vocaloid, index) {
           tag +=
             ' <img src="' +
-            appsettings.generationImagePath +
+            appsettings.vocaloidImagePath +
             +(index + 1) +
             '_' +
-            generation +
+            vocaloid +
             '.jpg" id="' +
-            generation +
-            '" name="generation" alt="' +
-            generation +
-            '" class="generation' +
-            (selectedGenerations.includes(generation) ? '' : ' darkened') +
-            '" onclick="clickGeneration(this)">';
+            vocaloid +
+            '" name="vocaloid" alt="' +
+            vocaloid +
+            '" class="vocaloid' +
+            (selectedVocaloids.includes(vocaloid) ? '' : ' darkened') +
+            '" onclick="clickVocaloid(this)">';
         });
 
         tag +=
@@ -517,24 +517,24 @@ function createDisplay(mode) {
             '</div>';
           tag += index === quizzes.length - 1 ? '' : '<br>';
         });
-        // 世代表示
+        // ボーカロイド表示
         tag +=
-          selectedGenerations.length > 0
-            ? ' <h2 class="h2-display">Generations</h2>'
+          selectedVocaloids.length > 0
+            ? ' <h2 class="h2-display">Vocaloids</h2>'
             : '';
-        generations.forEach(function (generation, index) {
-          if (selectedGenerations.includes(generation)) {
+        vocaloids.forEach(function (vocaloid, index) {
+          if (selectedVocaloids.includes(vocaloid)) {
             tag +=
               ' <img src="' +
-              appsettings.generationImagePath +
+              appsettings.vocaloidImagePath +
               +(index + 1) +
               '_' +
-              generation +
+              vocaloid +
               '.jpg" id="' +
-              generation +
-              '" name="generation" alt="' +
-              generation +
-              '" class="generation">';
+              vocaloid +
+              '" name="vocaloid" alt="' +
+              vocaloid +
+              '" class="vocaloid">';
           }
         });
 
