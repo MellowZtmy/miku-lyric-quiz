@@ -24,10 +24,6 @@ var colorSets = [];
 var songAlbums = [];
 var selectedAlbums = [];
 var albums = [];
-// ミニアルバム名リスト
-var songMinialbums = [];
-var selectedMinialbums = [];
-var minialbums = [];
 // 選択曲インデックス
 var selectedSongIndex = [];
 // クイズ
@@ -50,8 +46,6 @@ $(document).ready(async function () {
     csvData = await fetchCsvData(appsettings.lyricsFileName);
     songAlbums = csvData[appsettings.albumLine];
     albums = [...new Set(songAlbums)].filter((item) => item !== '-');
-    songMinialbums = csvData[appsettings.minialbumLine];
-    minialbums = [...new Set(songMinialbums)].filter((item) => item !== '-');
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
@@ -332,7 +326,6 @@ function createDisplay(mode) {
       if (mode === display.TOP) {
         // 選択中アルバム設定
         selectedAlbums = getLocalArray('selectedAlbums');
-        selectedMinialbums = getLocalArray('selectedMinialbums');
         // アルバム、ミニアルバムリストより出題する曲リスト取得
         selectedSongIndex = getSelectedSongIndex();
 
@@ -392,23 +385,6 @@ function createDisplay(mode) {
             '" onclick="clickAlbum(this)">';
         });
 
-        // ミニアルバム
-        tag += ' <h2 class="h2-display">Minialbums</h2>';
-        minialbums.forEach(function (album, index) {
-          tag +=
-            ' <img src="' +
-            appsettings.minialbumImagePath +
-            (index + 1) +
-            '_' +
-            album +
-            '.jpg" id="' +
-            album +
-            '" name="minialbum" alt="' +
-            album +
-            '" class="album' +
-            (selectedMinialbums.includes(album) ? '' : ' darkened') +
-            '" onclick="clickAlbum(this)">';
-        });
         tag +=
           ' <h2 class="center-text margin-top-20" id="songCount">' +
           selectedSongIndex.length +
@@ -559,26 +535,6 @@ function createDisplay(mode) {
               '.jpg" id="' +
               album +
               '" name="album" alt="' +
-              album +
-              '" class="album">';
-          }
-        });
-
-        tag +=
-          selectedMinialbums.length > 0
-            ? '<h2 class="h2-display">Minialbums</h2>'
-            : '';
-        minialbums.forEach(function (album, index) {
-          if (selectedMinialbums.includes(album)) {
-            tag +=
-              ' <img src="' +
-              appsettings.minialbumImagePath +
-              (index + 1) +
-              '_' +
-              album +
-              '.jpg" id="' +
-              album +
-              '" name="minialbum" alt="' +
               album +
               '" class="album">';
           }

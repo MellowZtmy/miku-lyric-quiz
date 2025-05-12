@@ -94,15 +94,9 @@ function clickAlbum(image) {
       ? selectedAlbums.filter((item) => item !== image.id)
       : selectedAlbums.concat(image.id);
   }
-  if (image.name === 'minialbum') {
-    selectedMinialbums = image.classList.contains('darkened')
-      ? selectedMinialbums.filter((item) => item !== image.id)
-      : selectedMinialbums.concat(image.id);
-  }
 
   // ローカルストレージに保存
   setLocalArray('selectedAlbums', selectedAlbums);
-  setLocalArray('selectedMinialbums', selectedMinialbums);
 
   // アルバム、ミニアルバムリストより出題する曲リスト取得
   selectedSongIndex = getSelectedSongIndex();
@@ -119,10 +113,7 @@ function getMatchingIndices(arr1, arr2) {
 // 出題する曲リスト
 function getSelectedSongIndex() {
   return Array.from(
-    new Set([
-      ...getMatchingIndices(songAlbums, selectedAlbums),
-      ...getMatchingIndices(songMinialbums, selectedMinialbums),
-    ])
+    new Set([...getMatchingIndices(songAlbums, selectedAlbums)])
   );
 }
 
