@@ -467,12 +467,10 @@ function createDisplay(mode) {
         tag += '          " ';
         tag += '        > ';
         tag += '          <iframe ';
-        tag +=
-          '            src="https://embed.nicovideo.jp/watch/' +
-          quiz.mvId +
-          '?loop=1&playlist=' +
-          quiz.mvId +
-          '" ';
+        tag += quiz.mvId.startsWith('sm')
+          ? '            src="https://embed.nicovideo.jp/watch/' //ニコニコ
+          : '            src="https://www.youtube.com/embed/'; // YouTube
+        tag += quiz.mvId + '?loop=1&playlist=' + quiz.mvId + '" ';
         tag += '            frameborder="0" ';
         tag += '            width="100%" ';
         tag += '            height="100%"  style="border-radius: 15px;"';
