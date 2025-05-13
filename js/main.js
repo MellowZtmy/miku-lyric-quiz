@@ -171,7 +171,9 @@ function createQuizzes() {
     );
   }
   if (songs.length < choiceLength) {
-    throw new Error('曲が5つ以上になるように選んでね');
+    throw new Error(
+      '曲が' + appsettings.choiceLength + 'つ以上になるように選んでね'
+    );
   }
   if (!currentGameMode) {
     throw new Error('モードを選んでね');
