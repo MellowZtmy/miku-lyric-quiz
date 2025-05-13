@@ -47,13 +47,7 @@ $(document).ready(async function () {
 
     // ボーカロイド情報読み込み
     songVocaloids = csvData[appsettings.vocaloidLine];
-    vocaloids = [
-      ...new Set(
-        songVocaloids
-          .flatMap((item) => item.split('・')) // 複数のボーカロイドがあった場合に対応。「・」で分割
-          .map((item) => item.trim()) // 前後の空白を除去
-      ),
-    ].filter((item) => item !== '-');
+    vocaloids = await fetchCsvData(appsettings.vocalodsFileName, 1);
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
@@ -377,19 +371,18 @@ function createDisplay(mode) {
 
         // ボーカロイド
         tag += ' <h2 class="h2-display">Vocaloids</h2>';
-        vocaloids.forEach(function (vocaloid, index) {
+        console.log('vocaloids', vocaloids);
+        vocaloids.forEach(function (vocaloid) {
           tag +=
             ' <img src="' +
             appsettings.vocaloidImagePath +
-            +(index + 1) +
-            '_' +
-            vocaloid +
+            vocaloid[0] +
             '.jpg" id="' +
-            vocaloid +
+            vocaloid[0] +
             '" name="vocaloid" alt="' +
-            vocaloid +
+            vocaloid[0] +
             '" class="vocaloid' +
-            (selectedVocaloids.includes(vocaloid) ? '' : ' darkened') +
+            (selectedVocaloids.includes(vocaloid[0]) ? '' : ' darkened') +
             '" onclick="clickVocaloid(this)">';
         });
 
@@ -530,18 +523,16 @@ function createDisplay(mode) {
           selectedVocaloids.length > 0
             ? ' <h2 class="h2-display">Vocaloids</h2>'
             : '';
-        vocaloids.forEach(function (vocaloid, index) {
-          if (selectedVocaloids.includes(vocaloid)) {
+        vocaloids.forEach(function (vocaloid) {
+          if (selectedVocaloids.includes(vocaloid[0])) {
             tag +=
               ' <img src="' +
               appsettings.vocaloidImagePath +
-              +(index + 1) +
-              '_' +
-              vocaloid +
+              vocaloid[0] +
               '.jpg" id="' +
-              vocaloid +
+              vocaloid[0] +
               '" name="vocaloid" alt="' +
-              vocaloid +
+              vocaloid[0] +
               '" class="vocaloid">';
           }
         });
