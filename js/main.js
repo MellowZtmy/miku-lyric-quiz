@@ -155,6 +155,10 @@ function createQuizzes() {
   const mvIds = csvData[appsettings.mvIdLine].filter((_, index) =>
     selectedSongIndex.includes(index)
   );
+  // 曲の動画サイト取得
+  const mvSites = csvData[5].filter((_, index) =>
+    selectedSongIndex.includes(index)
+  );
   // 問題数取得
   const quizzesLength = songs.length;
   // 選択肢数取得
@@ -190,6 +194,8 @@ function createQuizzes() {
   let correctAnswers = [];
   // MVIDリスト
   let mvIdList = [];
+  // MVサイトリスト
+  let mvSiteList = [];
 
   // 問題数分処理する
   for (let i = 0; i < quizzesLength; i++) {
@@ -209,6 +215,8 @@ function createQuizzes() {
         answerList.push(song); // 歌詞モードでもベースは曲
         // mvID追加
         mvIdList.push(mvIds[songIndex]);
+        // mvサイト追加
+        mvSiteList.push(mvSites[songIndex]);
         break;
       }
     }
@@ -293,20 +301,13 @@ function createQuizzes() {
     }
   }
 
-  console.log(
-    questions.map((question, index) => ({
-      question: question,
-      correctAnswer: correctAnswers[index],
-      choices: choices[index],
-      mvId: mvIdList[index],
-    }))
-  );
   // 戻り値作成
   return questions.map((question, index) => ({
     question: question,
     correctAnswer: correctAnswers[index],
     choices: choices[index],
     mvId: mvIdList[index],
+    mvSite: mvSiteList[index],
   }));
 }
 
@@ -470,7 +471,7 @@ function createDisplay(mode) {
         tag += '          " ';
         tag += '        > ';
         tag += '          <iframe ';
-        tag += quiz.mvId.startsWith('sm')
+        tag += quiz.mvSite.startsWith('ニコニコ')
           ? '            src="https://embed.nicovideo.jp/watch/' //ニコニコ
           : '            src="https://www.youtube.com/embed/'; // YouTube
         tag += quiz.mvId + '?loop=1&playlist=' + quiz.mvId + '" ';
