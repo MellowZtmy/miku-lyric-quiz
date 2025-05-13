@@ -101,19 +101,28 @@ function clickVocaloid(image) {
   // ボーカロイドリストより出題する曲リスト取得
   selectedSongIndex = getSelectedSongIndex();
   $('#songCount').text(selectedSongIndex.length + ' Songs');
+  console.log('Selected Vocaloids: ' + selectedSongIndex);
 }
 
-// 配列同士で一致するもののインデックスを返す
-function getMatchingIndices(arr1, arr2) {
+// 配列同士で一致するもののインデックスを返す(ボカロ名用)
+function getMatchingIndicesForVocaloid(arr1, arr2) {
   return arr1
-    .map((item, index) => (arr2.includes(item) ? index : -1))
+    .map((item, index) => {
+      // 「・」で分割して個々のボカロ名に分ける
+      const itemVocaloids = item.split('・');
+      // 選択されたボカロ名と少なくとも1つ一致するかどうか
+      const hasMatch = itemVocaloids.some((v) => arr2.includes(v));
+      return hasMatch ? index : -1;
+    })
     .filter((index) => index !== -1);
 }
 
 // 出題する曲リスト
 function getSelectedSongIndex() {
   return Array.from(
-    new Set([...getMatchingIndices(songVocaloids, selectedVocaloids)])
+    new Set([
+      ...getMatchingIndicesForVocaloid(songVocaloids, selectedVocaloids),
+    ])
   );
 }
 

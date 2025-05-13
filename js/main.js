@@ -44,8 +44,16 @@ $(document).ready(async function () {
 
     // 2. 歌詞情報読み込み
     csvData = await fetchCsvData(appsettings.lyricsFileName);
+
+    // ボーカロイド情報読み込み
     songVocaloids = csvData[appsettings.vocaloidLine];
-    vocaloids = [...new Set(songVocaloids)].filter((item) => item !== '-');
+    vocaloids = [
+      ...new Set(
+        songVocaloids
+          .flatMap((item) => item.split('・')) // 複数のボーカロイドがあった場合に対応。「・」で分割
+          .map((item) => item.trim()) // 前後の空白を除去
+      ),
+    ].filter((item) => item !== '-');
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
