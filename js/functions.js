@@ -9,25 +9,35 @@ function getJsonData(jsonUrl) {
   });
 }
 
-// CSVデータを取得する関数
+// CSVデータを取得する関数（PapaParse使用）
 async function fetchCsvData(fileName, skipRowCount = 0) {
   try {
     const response = await fetch(fileName);
-    const text = await response.text();
-    return parseCsv(text, skipRowCount);
+    const csvText = await response.text();
+    return parseCsvWithPapa(csvText, skipRowCount);
   } catch (error) {
-    throw new Error('Failed to load CSV file:' + fileName);
+    throw new Error('Failed to load CSV file: ' + fileName);
   }
 }
 
-// CSVデータをパースする関数（csvデータ内の「,」は「，」にしているため「,」に変換して返却）
-function parseCsv(csvText, skipRowCount) {
-  var regx = new RegExp(appsettings.commaInString, 'g');
-  return csvText
-    .trim()
-    .split(/\r?\n|\r/)
+// PapaParseを使ってCSVをパースする関数
+function parseCsvWithPapa(csvText, skipRowCount) {
+  const regx = new RegExp(appsettings.commaInString, 'g');
+
+  const result = Papa.parse(csvText.trim(), {
+    delimiter: ',', // ★ これを追加（警告回避のため）
+    skipEmptyLines: true,
+  });
+
+  if (result.errors.length > 0) {
+    console.error('CSV parsing error:', result.errors);
+    throw new Error('CSV parsing failed');
+  }
+
+  // skipRowCount行をスキップし、置換処理を行う
+  return result.data
     .slice(skipRowCount)
-    .map((line) => line.split(',').map((value) => value.replace(regx, ',')));
+    .map((row) => row.map((value) => value.replace(regx, ',')));
 }
 
 // 配列をシャッフルして返す
