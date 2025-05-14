@@ -496,7 +496,7 @@ function createDisplay(mode) {
         tag +=
           ' <h2 class="center-text' +
           (correctCount === quizzesLength ? ' text-correct' : '') +
-          '">' +
+          ' fade-up" style="animation-delay: 0s;">' +
           correctCount +
           ' / ' +
           quizzesLength +
@@ -506,10 +506,11 @@ function createDisplay(mode) {
             ? '<h2 class="center-text text-correct">PERFECT!!</h2>'
             : '';
         // Result表示
-        tag += ' <h2 class="h2-display">Result</h2>';
+        tag +=
+          ' <h2 class="h2-display fade-up" style="animation-delay: 0s;">Result</h2>';
         quizzes.forEach((quiz, index) => {
           tag +=
-            ' <div class="font-one-point-two">Q' +
+            ' <div class="font-one-point-two fade-up" style="animation-delay: 0s;">Q' +
             (index + 1) +
             '. ' +
             quiz.question +
@@ -517,7 +518,7 @@ function createDisplay(mode) {
           tag +=
             ' <div class="font-one-point-two right-text ' +
             (selectedList[index] === quiz.correctAnswer ? 'text-correct' : '') +
-            '">' +
+            ' fade-up" style="animation-delay: 0s;">' +
             quiz.choices[quiz.correctAnswer] +
             '</div>';
           tag += index === quizzes.length - 1 ? '' : '<br>';
@@ -525,7 +526,7 @@ function createDisplay(mode) {
         // ボーカロイド表示
         tag +=
           selectedVocaloids.length > 0
-            ? ' <h2 class="h2-display">Vocaloids</h2>'
+            ? ' <h2 class="h2-display fade-up" style="animation-delay: 1s;">Vocaloids</h2>'
             : '';
         vocaloids.forEach(function (vocaloid) {
           if (selectedVocaloids.includes(vocaloid[0])) {
@@ -537,22 +538,23 @@ function createDisplay(mode) {
               vocaloid[0] +
               '" name="vocaloid" alt="' +
               vocaloid[0] +
-              '" class="vocaloid">';
+              '" class="vocaloid fade-up" style="animation-delay: 1s;">';
           }
         });
 
         // 全問正解の場合紙吹雪、ひとこと
         if (correctCount === quizzesLength) {
-          tag += '<h2 class="h2-display font-one-point-two">ひとこと</h2>';
           tag +=
-            '<div class="font-one-point-two">' +
+            '<h2 class="h2-display font-one-point-two fade-up" style="animation-delay: 2s;">ひとこと</h2>';
+          tag +=
+            '<div class="font-one-point-two fade-up" style="animation-delay: 2s;">' +
             acaneWords[getRamdomNumber(acaneWords.length)] +
             '</div>';
           $('#confetti').prepend('<canvas></canvas>');
           dispConfetti();
         }
         tag +=
-          ' <button id="retry" onclick="createDisplay(display.TOP)" class="btn btn--main btn--radius btn--cubic">RETRY</button>';
+          ' <button id="retry" onclick="createDisplay(display.TOP)" class="btn btn--main btn--radius btn--cubic fade-up" style="animation-delay: 2s;">RETRY</button>';
 
         // ハイスコア設定(「??」は「<」より優先度が低いのでカッコをつける
         if ((Number(getLocal('ztmyLyricQuizHighScore')) ?? 0) < correctCount) {
