@@ -459,7 +459,7 @@ function createDisplay(mode) {
           : '   <button id="result" onclick="showResult()" class="btn btn--main btn--radius btn--cubic visibility-hidden">RESULT</button>';
         // MV表示
         tag += '    <!--MV ニコニコ--> ';
-        tag += '    <div class="margin-top-20" id="mv" hidden> ';
+        tag += '    <div class="margin-top-20 fade-up" id="mv" hidden> ';
         tag +=
           '      <div style="position: relative; width: 100%; padding-bottom: 56.25%"> ';
         tag += '        <div ';

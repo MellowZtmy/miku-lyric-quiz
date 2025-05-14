@@ -212,6 +212,7 @@ input[type=radio] {
   background-color: #f7f7f7;
 }
 
+/* 左から徐々に表示 */
 .reveal {
   white-space: nowrap;       /* 改行させない */
   overflow: hidden;
@@ -225,5 +226,19 @@ input[type=radio] {
 @keyframes clip-reveal {
   to {
     clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* 下からふわっと表示 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
