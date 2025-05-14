@@ -401,23 +401,38 @@ function createDisplay(mode) {
 
         // 年代
         tag += ' <h2 class="h2-display">Generation</h2>';
+        tag += ' <div class="year-select-container"> ';
+        tag += ' <label class="year-select-label">From：</label> ';
         tag += ' <div class="year-select"> ';
         // 開始年
         tag += '   <select id="startYear"> ';
-        tag += '   <option value="" hidden>From</option> ';
+        tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
-          tag += `<option value="${generation}">${generation}</option>`;
+          let selected =
+            (!getLocal('startYear') && generation === generations[0]) ||
+            (getLocal('startYear') && generation === getLocal('startYear'))
+              ? 'selected'
+              : '';
+          tag += `<option value="${generation}" ${selected}>${generation}</option>`;
         });
         tag += '   </select> ';
         tag += ' </div> ';
-        tag += ' <div class="year-select"> ';
         // 終了年
+        tag += ' <label class="year-select-label">To：</label> ';
+        tag += ' <div class="year-select"> ';
         tag += '   <select id="endYear"> ';
-        tag += '   <option value="" hidden>To</option> ';
+        tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
-          tag += `<option value="${generation}">${generation}</option>`;
+          let selected =
+            (!getLocal('endYear') &&
+              generation === generations[generations.length - 1]) ||
+            (getLocal('endYear') && generation === getLocal('endYear'))
+              ? 'selected'
+              : '';
+          tag += `<option value="${generation}" ${selected}>${generation}</option>`;
         });
         tag += '   </select> ';
+        tag += ' </div> ';
         tag += ' </div> ';
 
         // 曲数
