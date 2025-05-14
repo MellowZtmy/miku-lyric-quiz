@@ -562,7 +562,10 @@ function createDisplay(mode) {
       // タグ流し込み
       $('#display').append(tag);
 
-      // CSS適用
+      // ふわっと表示
+      $('body').stop().addClass('is-show');
+
+      // カラー適用
       changeColor(0);
     } finally {
       // 最後にスピナーを非表示
