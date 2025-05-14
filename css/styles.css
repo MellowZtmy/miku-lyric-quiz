@@ -211,3 +211,12 @@ input[type=radio] {
 .quizModeRadio:hover {
   background-color: #f7f7f7;
 }
+
+/* ふわっと表示 */
+.fadeIn {
+  opacity: 0;
+  transition: 2s;
+}
+.fadeIn.is-show {
+  opacity: 1;
+}

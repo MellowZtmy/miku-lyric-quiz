@@ -187,3 +187,12 @@ function changeColor(plusCount) {
     'Color ↺ <br>(' + (colorIndexNow + 1) + '/' + colorSets.length + ')'
   );
 }
+
+/* ふわっと表示 */
+$(function () {
+  $('.inview').on('inview', function (event, isInView) {
+    if (isInView) {
+      $(this).stop().addClass('is-show');
+    }
+  });
+});
