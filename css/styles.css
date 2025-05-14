@@ -211,3 +211,19 @@ input[type=radio] {
 .quizModeRadio:hover {
   background-color: #f7f7f7;
 }
+
+.reveal {
+  white-space: nowrap;       /* 改行させない */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* アニメーション */
+  animation: clip-reveal 2s ease-out forwards;
+  clip-path: inset(0 100% 0 0);
+}
+
+@keyframes clip-reveal {
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
