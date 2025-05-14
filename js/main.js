@@ -24,6 +24,10 @@ var colorSets = [];
 var songVocaloids = [];
 var selectedVocaloids = [];
 var vocaloids = [];
+// 年代リスト
+var songGenerations = [];
+var selectedGenerations = [];
+var generations = [];
 // 選択曲インデックス
 var selectedSongIndex = [];
 // クイズ
@@ -48,6 +52,12 @@ $(document).ready(async function () {
     // ボーカロイド情報読み込み
     songVocaloids = csvData[appsettings.vocaloidLine];
     vocaloids = await fetchCsvData(appsettings.vocalodsFileName, 1);
+
+    // 世代情報読み込み
+    songGenerations = csvData[appsettings.uploadedDateLine];
+    generations = [
+      ...new Set(songGenerations.map((dt) => dt.slice(0, 4))),
+    ].sort();
 
     // 3. ACAねさんのひとこと読み込み
     acaneWords = await fetchCsvData(appsettings.acaneWordsFileName);
@@ -373,7 +383,7 @@ function createDisplay(mode) {
         );
 
         // ボーカロイド
-        tag += ' <h2 class="h2-display">Vocaloids</h2>';
+        tag += ' <h2 class="h2-display">Vocaloid</h2>';
         console.log('vocaloids', vocaloids);
         vocaloids.forEach(function (vocaloid) {
           tag +=
@@ -389,6 +399,28 @@ function createDisplay(mode) {
             '" onclick="clickVocaloid(this)">';
         });
 
+        // 年代
+        tag += ' <h2 class="h2-display">Generation</h2>';
+        tag += ' <div class="year-select"> ';
+        // 開始年
+        tag += '   <select id="startYear"> ';
+        tag += '   <option value="" hidden>From</option> ';
+        generations.forEach(function (generation) {
+          tag += `<option value="${generation}">${generation}</option>`;
+        });
+        tag += '   </select> ';
+        tag += ' </div> ';
+        tag += ' <div class="year-select"> ';
+        // 終了年
+        tag += '   <select id="endYear"> ';
+        tag += '   <option value="" hidden>To</option> ';
+        generations.forEach(function (generation) {
+          tag += `<option value="${generation}">${generation}</option>`;
+        });
+        tag += '   </select> ';
+        tag += ' </div> ';
+
+        // 曲数
         tag +=
           ' <h2 class="center-text margin-top-20" id="songCount">' +
           selectedSongIndex.length +
