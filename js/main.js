@@ -402,7 +402,6 @@ function createDisplay(mode) {
         // 年代
         tag += ' <h2 class="h2-display">Generation</h2>';
         tag += ' <div class="year-select-container"> ';
-        tag += ' <label class="year-select-label">From：</label> ';
         tag += ' <div class="year-select"> ';
         // 開始年
         tag += '   <select id="startYear"> ';
@@ -418,7 +417,7 @@ function createDisplay(mode) {
         tag += '   </select> ';
         tag += ' </div> ';
         // 終了年
-        tag += ' <label class="year-select-label">To：</label> ';
+        tag += ' <label class="year-select-label">～</label> ';
         tag += ' <div class="year-select"> ';
         tag += '   <select id="endYear"> ';
         tag += '   <option value="" hidden>Choose</option> ';
