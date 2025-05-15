@@ -455,6 +455,11 @@ function createDisplay(mode) {
           ' <h2 id="changeColor" class="center-text margin-top-20" onclick="changeColor(1)">Color ↺</h2>';
         tag += ' </div>';
 
+        // 引用について
+        tag += ' <footer style="text-align: center; margin-top: 2rem;">';
+        tag +=
+          '   <a href="about.html" target="_blank" rel="noopener noreferrer">引用について</a>';
+        tag += ' </footer>;';
         // 紙吹雪解除
         $('canvas')?.remove();
 
