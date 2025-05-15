@@ -536,7 +536,7 @@ function createDisplay(mode) {
         tag += '          ></iframe> ';
         tag += '        </div> ';
         tag += '      </div> ';
-        tag += '    <p class="right-text">より引用</p>';
+        tag += '    <p class="right-text">より</p>';
         tag += '    </div> ';
       } else if (mode === display.RESULT) {
         // 問題数取得
