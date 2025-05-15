@@ -458,7 +458,7 @@ function createDisplay(mode) {
         // 引用について
         tag += ' <footer style="text-align: center; margin-top: 2rem;">';
         tag +=
-          '   <a href="about.html" target="_blank" rel="noopener noreferrer">引用について</a>';
+          '   <a href="about.html" target="_blank" rel="noopener noreferrer">サイト情報</a>';
         tag += ' </footer>;';
         // 紙吹雪解除
         $('canvas')?.remove();

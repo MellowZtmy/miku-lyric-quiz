@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>引用について | みっくみくな歌詞クイズ！</title>
+    <title>サイト情報 | みっくみくな歌詞クイズ！</title>
     <style>
       body {
         font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
@@ -24,65 +24,170 @@
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
       }
+
+      /* タブスタイル */
+      .tabs {
+        display: flex;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 1rem;
+      }
+      .tab {
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        background: #eee;
+        margin-right: 0.3rem;
+        border-radius: 5px 5px 0 0;
+        user-select: none;
+      }
+      .tab.active {
+        background: #fff;
+        font-weight: bold;
+        border-bottom: 2px solid #fff;
+      }
+      .tab-content {
+        display: none;
+        background: #fff;
+        padding-bottom: 2rem;
+      }
+      .tab-content.active {
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <h1>引用について | みっくみくな歌詞クイズ！</h1>
+    <h1>サイト情報 | みっくみくな歌詞クイズ！</h1>
 
-    <p>
-      当サイトでは、特定のアーティストの楽曲に関するクイズを提供しています。<br />
-      その際、問題文において歌詞の一節を
-      <strong>著作権法第32条「引用の規定」</strong>
-      に基づき、必要最小限の範囲で引用させていただいています。
-    </p>
+    <div class="tabs">
+      <div class="tab active" data-tab="quote">引用について</div>
+      <div class="tab" data-tab="about">このサイトについて</div>
+      <div class="tab" data-tab="disclaimer">免責事項</div>
+      <div class="tab" data-tab="privacy">プライバシーポリシー</div>
+    </div>
 
-    <h2>引用の目的と考え方</h2>
-    <ul>
-      <li>楽曲の理解や興味を深めることを目的としたクイズの一部としての使用</li>
-      <li>楽曲そのもののプロモーションや魅力の紹介</li>
-      <li>出典を明記し、著作者・権利者の権利を尊重する</li>
-    </ul>
+    <section id="quote" class="tab-content active">
+      <h2>引用について</h2>
+      <p>
+        当サイトでは、特定のアーティストの楽曲に関するクイズを提供しています。<br />
+        その際、問題文において歌詞の一節を
+        <strong>著作権法第32条「引用の規定」</strong>
+        に基づき、必要最小限の範囲で引用させていただいています。
+      </p>
 
-    <h2>引用の条件への配慮</h2>
-    <ol>
-      <li>
-        <strong>主従関係の明確化：</strong> クイズが主で、歌詞は補足的要素です。
-      </li>
-      <li>
-        <strong>引用範囲の最小化：</strong>
-        歌詞の一部（1〜2行程度）のみを使用しています。
-      </li>
-      <li>
-        <strong>出典の明記：</strong>
-        曲名・アーティスト名・作詞者名を併記しています。<br />
-        例：<code>千本桜 / 黒うさP（作詞：黒うさP）</code>
-      </li>
-      <li>
-        <strong>非営利での運営：</strong>
-        サイトはファンによる非営利活動の一環です。
-      </li>
-    </ol>
+      <h3>引用の目的と考え方</h3>
+      <ul>
+        <li>
+          楽曲の理解や興味を深めることを目的としたクイズの一部としての使用
+        </li>
+        <li>楽曲そのもののプロモーションや魅力の紹介</li>
+        <li>出典を明記し、著作者・権利者の権利を尊重する</li>
+      </ul>
 
-    <h2>著作権者・関係者の皆様へ</h2>
-    <p>
-      万が一、引用の内容に問題がある場合や削除をご希望される場合は、<br />
-      お手数ですが以下の連絡先までご連絡ください。速やかに対応いたします。
-    </p>
-    <p>
-      📩 連絡先：<a href="mailto:mellowztmy@gmail.com">mellowztmy@gmail.com</a>
-    </p>
+      <h3>引用の条件への配慮</h3>
+      <ol>
+        <li>
+          <strong>主従関係の明確化：</strong>
+          クイズが主で、歌詞は補足的要素です。
+        </li>
+        <li>
+          <strong>引用範囲の最小化：</strong>
+          歌詞の一部（1〜2行程度）のみを使用しています。
+        </li>
+        <li>
+          <strong>出典の明記：</strong>
+          曲名・アーティスト名・作詞者名を併記しています。<br />
+          例：<code>千本桜 / 黒うさP（作詞：黒うさP）</code>
+        </li>
+        <li>
+          <strong>非営利での運営：</strong>
+          サイトはファンによる非営利活動の一環です。
+        </li>
+      </ol>
 
-    <h2>リスペクトとリンクについて</h2>
-    <p>
-      当サイトでは、可能な限り<strong>公式動画や配信サイトへのリンク</strong>を掲載し、<br />
-      アーティストや楽曲の正当な価値を広めることを目指しています。
-    </p>
+      <h3>著作権者・関係者の皆様へ</h3>
+      <p>
+        万が一、引用の内容に問題がある場合や削除をご希望される場合は、<br />
+        お手数ですが以下の連絡先までご連絡ください。速やかに対応いたします。
+      </p>
+      <p>
+        📩 連絡先：<a href="mailto:mellowztmy@gmail.com"
+          >mellowztmy@gmail.com</a
+        >
+      </p>
 
-    <h2>まとめ</h2>
-    <ul>
-      <li>引用は法律に基づき、適切な形で行っています</li>
-      <li>非営利目的で、アーティストへの敬意をもって運営しています</li>
-      <li>ご意見・ご要望があればお気軽にご連絡ください</li>
-    </ul>
+      <h3>リスペクトとリンクについて</h3>
+      <p>
+        当サイトでは、可能な限り<strong>公式動画や配信サイトへのリンク</strong>を掲載し、<br />
+        アーティストや楽曲の正当な価値を広めることを目指しています。
+      </p>
+
+      <h3>まとめ</h3>
+      <ul>
+        <li>引用は法律に基づき、適切な形で行っています</li>
+        <li>非営利目的で、アーティストへの敬意をもって運営しています</li>
+        <li>ご意見・ご要望があればお気軽にご連絡ください</li>
+      </ul>
+    </section>
+
+    <section id="about" class="tab-content">
+      <h2>このサイトについて</h2>
+      <p>
+        当サイトは、特定のアーティストの楽曲を愛するファンが制作した非公式のクイズサイトです。
+      </p>
+      <p>
+        著作権法に基づく適切な引用を心がけ、問題文中の歌詞引用は必要最小限にとどめています。
+      </p>
+      <p>
+        本サイトは営利目的ではなく、楽曲への理解や興味を深めることを目的としています。公式サイトではありませんので、あらかじめご了承ください。
+      </p>
+    </section>
+
+    <section id="disclaimer" class="tab-content">
+      <h2>免責事項</h2>
+      <p>
+        当サイトの情報は可能な限り正確を期していますが、内容の完全性や正確性を保証するものではありません。
+      </p>
+      <p>
+        掲載されているリンク先の内容やサービスについて当サイトは責任を負いかねます。
+      </p>
+      <p>予告なく内容の変更や削除を行う場合があります。ご了承ください。</p>
+    </section>
+
+    <section id="privacy" class="tab-content">
+      <h2>プライバシーポリシー</h2>
+      <p>
+        当サイトではアクセス解析等のためにCookieや第三者サービスを利用する場合があります。
+      </p>
+      <p>
+        収集した情報は適切に管理し、個人が特定できる形での利用は行いません。
+      </p>
+      <p>
+        Cookieの利用を希望されない場合は、ブラウザの設定で拒否することが可能です。
+      </p>
+    </section>
+
+    <script>
+      const tabs = document.querySelectorAll('.tab');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          // タブのアクティブ切り替え
+          tabs.forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // コンテンツ表示切り替え
+          const target = tab.dataset.tab;
+          contents.forEach((c) => {
+            if (c.id === target) {
+              c.classList.add('active');
+            } else {
+              c.classList.remove('active');
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
