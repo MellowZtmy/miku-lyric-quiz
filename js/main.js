@@ -166,7 +166,7 @@ function createQuizzes() {
     selectedSongIndex.includes(index)
   );
   // 曲の動画サイト取得
-  const mvSites = csvData[5].filter((_, index) =>
+  const mvSites = csvData[appsettings.siteNameLine].filter((_, index) =>
     selectedSongIndex.includes(index)
   );
   // 問題数取得
@@ -541,8 +541,9 @@ function createDisplay(mode) {
         tag += '          ></iframe> ';
         tag += '        </div> ';
         tag += '      </div> ';
-        tag += '    <p class="right-text">より</p>';
+        tag += `    <p class="right-text">千本桜 / 黒うさP（作詞：黒うさP）</p>`;
         tag += '    </div> ';
+        console.log(quiz);
       } else if (mode === display.RESULT) {
         // 問題数取得
         var quizzesLength = quizzes.length;
