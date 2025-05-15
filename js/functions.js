@@ -111,7 +111,48 @@ function clickVocaloid(image) {
   // ボーカロイドリストより出題する曲リスト取得
   selectedSongIndex = getSelectedSongIndex();
   $('#songCount').text(selectedSongIndex.length + ' Songs');
-  console.log('Selected Vocaloids: ' + selectedSongIndex);
+}
+
+// 年代変更時
+function changeGeneration(id, value) {
+  // ローカルストレージに保存(画面操作で呼ばれたときのみ)
+  if (id) setLocal(id, value);
+
+  // 選択中リストの編集
+  // 年代開始終了の取得
+  let year1 = getLocal('startYear') ?? generations[0];
+  let year2 = getLocal('endYear') ?? generations[generations.length - 1];
+  if (year1 > year2) {
+    // 開始 > 終了 の場合、入れ替え
+    [year1, year2] = [year2, year1];
+  }
+  // 選択中世代リストの編集
+  selectedGenerations = [];
+  for (let year = year1; year <= year2; year++) {
+    selectedGenerations.push(String(year));
+  }
+  // ボーカロイドリストより出題する曲リスト取得
+  selectedSongIndex = getSelectedSongIndex();
+  $('#songCount').text(selectedSongIndex.length + ' Songs');
+}
+
+// 出題する曲リスト(ボーカロイドの選択と年代の選択から)
+function getSelectedSongIndex() {
+  const vocaloidIndices = getMatchingIndicesForVocaloid(
+    songVocaloids,
+    selectedVocaloids
+  );
+  const generationIndices = getMatchingIndicesForGeneration(
+    songGenerations,
+    selectedGenerations
+  );
+
+  console.log(
+    'Vocaloid Indices:',
+    vocaloidIndices.filter((i) => generationIndices.includes(i))
+  );
+  // 積集合（両方に含まれるインデックスのみ）
+  return vocaloidIndices.filter((i) => generationIndices.includes(i));
 }
 
 // 配列同士で一致するもののインデックスを返す(ボカロ名用)
@@ -127,13 +168,16 @@ function getMatchingIndicesForVocaloid(arr1, arr2) {
     .filter((index) => index !== -1);
 }
 
-// 出題する曲リスト
-function getSelectedSongIndex() {
-  return Array.from(
-    new Set([
-      ...getMatchingIndicesForVocaloid(songVocaloids, selectedVocaloids),
-    ])
-  );
+// 配列同士で一致するもののインデックスを返す(年代用)
+function getMatchingIndicesForGeneration(dateList, yearList) {
+  const result = [];
+  dateList.forEach((dateStr, index) => {
+    const year = dateStr.slice(0, 4); // 最初の4文字が年
+    if (yearList.includes(year)) {
+      result.push(index);
+    }
+  });
+  return result;
 }
 
 // カラーチェンジ

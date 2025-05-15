@@ -384,7 +384,6 @@ function createDisplay(mode) {
 
         // ボーカロイド
         tag += ' <h2 class="h2-display">Vocaloid</h2>';
-        console.log('vocaloids', vocaloids);
         vocaloids.forEach(function (vocaloid) {
           tag +=
             ' <img src="' +
@@ -404,7 +403,8 @@ function createDisplay(mode) {
         tag += ' <div class="year-select-container"> ';
         tag += ' <div class="year-select"> ';
         // 開始年
-        tag += '   <select id="startYear"> ';
+        tag +=
+          '   <select id="startYear" onchange="changeGeneration(this.id, this.value)"> ';
         tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
           let selected =
@@ -412,14 +412,17 @@ function createDisplay(mode) {
             (getLocal('startYear') && generation === getLocal('startYear'))
               ? 'selected'
               : '';
-          tag += `<option value="${generation}" ${selected}>${generation}</option>`;
+          tag += `<option value="${generation}" ${selected}>${generation}年</option>`;
+          // ローカルストレージにセット
+          if (selected) setLocal('startYear', generation);
         });
         tag += '   </select> ';
         tag += ' </div> ';
         // 終了年
         tag += ' <label class="year-select-label">～</label> ';
         tag += ' <div class="year-select"> ';
-        tag += '   <select id="endYear"> ';
+        tag +=
+          '   <select id="endYear" onchange="changeGeneration(this.id, this.value)"> ';
         tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
           let selected =
@@ -428,11 +431,15 @@ function createDisplay(mode) {
             (getLocal('endYear') && generation === getLocal('endYear'))
               ? 'selected'
               : '';
-          tag += `<option value="${generation}" ${selected}>${generation}</option>`;
+          tag += `<option value="${generation}" ${selected}>${generation}年</option>`;
+          // ローカルストレージにセット
+          if (selected) setLocal('endYear', generation);
         });
         tag += '   </select> ';
         tag += ' </div> ';
         tag += ' </div> ';
+        // 年代変更イベントの呼び出し(出題する曲リスト編集のため)
+        changeGeneration();
 
         // 曲数
         tag +=
