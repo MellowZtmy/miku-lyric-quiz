@@ -383,7 +383,7 @@ function createDisplay(mode) {
         );
 
         // ボーカロイド
-        tag += ' <h2 class="h2-display">Vocaloid</h2>';
+        tag += ' <h2 class="h2-display">Vocaloids</h2>';
         vocaloids.forEach(function (vocaloid) {
           tag +=
             ' <img src="' +
@@ -399,13 +399,12 @@ function createDisplay(mode) {
         });
 
         // 年代
-        tag += ' <h2 class="h2-display">Generation</h2>';
+        tag += ' <h2 class="h2-display">Generations</h2>';
         tag += ' <div class="year-select-container"> ';
         tag += ' <div class="year-select"> ';
         // 開始年
         tag +=
           '   <select id="startYear" onchange="changeGeneration(this.id, this.value)"> ';
-        tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
           let selected =
             (!getLocal('startYear') && generation === generations[0]) ||
@@ -423,7 +422,6 @@ function createDisplay(mode) {
         tag += ' <div class="year-select"> ';
         tag +=
           '   <select id="endYear" onchange="changeGeneration(this.id, this.value)"> ';
-        tag += '   <option value="" hidden>Choose</option> ';
         generations.forEach(function (generation) {
           let selected =
             (!getLocal('endYear') &&
@@ -595,19 +593,24 @@ function createDisplay(mode) {
           }
         });
 
+        tag +=
+          ' <h2 class="h2-display fade-up" style="animation-delay: 2s;">Generations</h2>';
+        tag += ` <label class="year-select-label fade-up" style="animation-delay: 2s;">${getLocal(
+          'startYear'
+        )}年 ～ ${getLocal('endYear')}年</label>  `;
         // 全問正解の場合紙吹雪、ひとこと
         if (correctCount === quizzesLength) {
           tag +=
-            '<h2 class="h2-display font-one-point-two fade-up" style="animation-delay: 2s;">ひとこと</h2>';
+            '<h2 class="h2-display font-one-point-two fade-up" style="animation-delay: 3s;">ひとこと</h2>';
           tag +=
-            '<div class="font-one-point-two fade-up" style="animation-delay: 2s;">' +
+            '<div class="font-one-point-two fade-up" style="animation-delay: 3s;">' +
             acaneWords[getRamdomNumber(acaneWords.length)] +
             '</div>';
           $('#confetti').prepend('<canvas></canvas>');
           dispConfetti();
         }
         tag +=
-          ' <button id="retry" onclick="createDisplay(display.TOP)" class="btn btn--main btn--radius btn--cubic fade-up" style="animation-delay: 2s;">RETRY</button>';
+          ' <button id="retry" onclick="createDisplay(display.TOP)" class="btn btn--main btn--radius btn--cubic fade-up" style="animation-delay: 3s;">RETRY</button>';
 
         // ハイスコア設定(「??」は「<」より優先度が低いのでカッコをつける
         if ((Number(getLocal('ztmyLyricQuizHighScore')) ?? 0) < correctCount) {

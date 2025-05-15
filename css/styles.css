@@ -263,6 +263,7 @@ input[type=radio] {
   align-items: center;
   border: 2px solid;
   border-radius: 50px;
+  width: 140px;
 }
 /*プルダウンの三角を設定*/
 .year-select::before {
