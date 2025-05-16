@@ -272,16 +272,16 @@ input[type=radio] {
   content: '';
   width: 16px;
   height: 8px;
-  /* TODO background: #da3c41; */
+  background: #141819;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 .year-select select {
   width: 100%;
   padding: 10px 45px 10px 10px;
-  /* TODO color: #da3c41; */
   cursor: pointer;
   text-overflow: ellipsis;/*テキストがオーバーしたら'...'で省略*/
   z-index: 1;
+  font-size: 1.2rem;
   /* 標準のスタイルを無効にする */
   border: none;
   appearance: none;
