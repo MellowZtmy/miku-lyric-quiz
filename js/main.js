@@ -570,7 +570,7 @@ function createDisplay(mode) {
         tag += '          ></iframe> ';
         tag += '        </div> ';
         tag += '      </div> ';
-        tag += `    <p class="right-text"> ${quiz.composer} <br>『${quiz.song}』<br>（作詞：${quiz.lyricist}）</p>`;
+        tag += `    <p class="right-text"> ${quiz.composer}『${quiz.song}』<br>（作詞：${quiz.lyricist}）</p>`;
         tag += '    </div> ';
         console.log(quiz);
       } else if (mode === display.RESULT) {
