@@ -214,9 +214,9 @@ input[type=radio] {
 
 /* 左から徐々に表示 */
 .reveal {
-  white-space: nowrap;       /* 改行させない */
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
 
   /* アニメーション */
   animation: clip-reveal 2s ease-out forwards;
