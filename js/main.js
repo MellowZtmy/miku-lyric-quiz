@@ -163,6 +163,10 @@ function createQuizzes() {
   csvData.slice(appsettings.lyricsStartLine).forEach((lyric) => {
     lyrics.push(lyric.filter((_, index) => selectedSongIndex.includes(index)));
   });
+  // 曲の投稿日取得
+  const uploadedDates = csvData[appsettings.uploadedDateLine].filter(
+    (_, index) => selectedSongIndex.includes(index)
+  );
   // 曲の動画ID取得
   const mvIds = csvData[appsettings.mvIdLine].filter((_, index) =>
     selectedSongIndex.includes(index)
@@ -214,6 +218,8 @@ function createQuizzes() {
   let correctAnswers = [];
   // MVIDリスト
   let mvIdList = [];
+  // 投稿日リスト
+  let uploadedDateList = [];
   // 作曲者リスト
   let composerList = [];
   // 作詞者リスト
@@ -239,6 +245,8 @@ function createQuizzes() {
         songList.push(song); // 歌詞モードでもベースは曲
         // mvID追加
         mvIdList.push(mvIds[songIndex]);
+        // 投稿日追加
+        uploadedDateList.push(uploadedDates[songIndex]);
         // 作曲者追加
         composerList.push(composers[songIndex]);
         // 作詞者追加
@@ -338,6 +346,7 @@ function createQuizzes() {
     mvId: mvIdList[index],
     composer: composerList[index],
     lyricist: lyricistList[index],
+    uploadedDate: uploadedDateList[index],
     mvSite: mvSiteList[index],
   }));
 }
@@ -568,7 +577,9 @@ function createDisplay(mode) {
         tag += '          ></iframe> ';
         tag += '        </div> ';
         tag += '      </div> ';
-        tag += `    <p class="right-text"> ${quiz.composer}『${quiz.song}』<br>（作詞：${quiz.lyricist}）</p>`;
+        tag += `    <p class="right-text"> ${quiz.composer}『${quiz.song}』<br>`;
+        tag += `    （作詞：${quiz.lyricist}）<br>`;
+        tag += `    ${quiz.uploadedDate}</p>`;
         tag += '    </div> ';
         console.log(quiz);
       } else if (mode === display.RESULT) {
