@@ -577,8 +577,8 @@ function createDisplay(mode) {
         tag += '          ></iframe> ';
         tag += '        </div> ';
         tag += '      </div> ';
-        tag += `    <p class="right-text"> ${quiz.composer}『${quiz.song}』<br>`;
-        tag += `    （作詞：${quiz.lyricist}）<br>`;
+        tag += `    <p class="right-text"> ♪${quiz.song} / ${quiz.composer}<br>`;
+        tag += `    作詞 ： ${quiz.lyricist}<br>`;
         tag += `    ${quiz.uploadedDate}</p>`;
         tag += '    </div> ';
         console.log(quiz);
