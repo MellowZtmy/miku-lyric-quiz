@@ -15,6 +15,8 @@ function dispConfetti() {
       var pIndex = 0;
       var frameId;
 
+      const colors = ['#ff4c4c', '#4c6eff', '#4cff4c', '#ffe74c']; // 赤 青 緑 黄
+
       function Dot(x, y, vx, vy, color) {
         this.x = x;
         this.y = y;
@@ -63,27 +65,15 @@ function dispConfetti() {
       function loop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (frameId % 1 == 0) {
-          new Dot(
-            Math.random() * canvas.width,
-            -50,
-            getRandom(-3, 3),
-            getRandom(2, 4),
-            '#f9e7c3'
-          );
-          new Dot(
-            Math.random() * canvas.width,
-            -50,
-            getRandom(-3, 3),
-            getRandom(2, 4),
-            '#e3b458'
-          );
-          new Dot(
-            Math.random() * canvas.width,
-            -50,
-            getRandom(-3, 3),
-            getRandom(2, 4),
-            '#9d7d1d'
-          );
+          for (let i = 0; i < 3; i++) {
+            new Dot(
+              Math.random() * canvas.width,
+              -50,
+              getRandom(-3, 3),
+              getRandom(2, 4),
+              colors[Math.floor(Math.random() * colors.length)]
+            );
+          }
         }
         for (var i in particles) {
           particles[i].draw();
